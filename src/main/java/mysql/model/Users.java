@@ -7,7 +7,7 @@ package mysql.model;
  * @author JONATHAN
  */
 public class Users {
-	
+	private int id;
 	private String name;
 	private String email;
 	
@@ -48,6 +48,20 @@ public class Users {
 	 */
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	/**
+	 * @return the id
+	 */
+	public int getId() {
+		return id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 	

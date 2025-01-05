@@ -10,7 +10,7 @@ CREATE TABLE users (
 DELIMITER $$
 CREATE PROCEDURE InsertUser(IN p_name VARCHAR(100), IN p_email VARCHAR(100))
 BEGIN 
-INSERT INTO USERS(name, email) VALUES(p_name,p_eamail);
+INSERT INTO USERS(name, email) VALUES(p_name,p_email);
 END $$
 
 DELIMITER ;

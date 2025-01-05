@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import mysql.DBConnection.DataBaseConnection;
+import mysql.model.Users;
 
 /**
  * @author JONATHAN
@@ -18,22 +19,22 @@ public class EntityDAO {
 	private static Connection conn = DataBaseConnection.getConnection();
 	private static CallableStatement stmt;
 	
-	public static void createUser(String name, String email) {
+	public static void createUser(Users user) {
 		try {
 	    String query = "{CALL InsertUser(?, ?)}";  // Calling the InsertUser stored procedure
 	        stmt = conn.prepareCall(query);
 	        
-	        stmt.setString(1, name);
-	        stmt.setString(2, email);
+	        stmt.setString(1, user.getName());
+	        stmt.setString(2, user.getEmail());
 	        stmt.executeUpdate();
 	        
-	        System.out.println("User created successfully!");
+	        System.out.println("User "+user.getName()+" created successfully!");
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	    }
 	}
 
-	public void getUserById(int id) {
+	public static void getUserById(int id) {
 	    String query = "{CALL GetUserById(?)}";  // Calling the GetUserById stored procedure
 	    try {
 	    	stmt = conn.prepareCall(query);
@@ -52,14 +53,14 @@ public class EntityDAO {
 	    }
 	}
 	
-	public static void updateUser(int id, String name, String email) {
+	public static void updateUser(Users user,int id) {
 	    String query = "{CALL UpdateUser(?, ?, ?)}";  // Calling the UpdateUser stored procedure
 	    try {
 	         CallableStatement stmt = conn.prepareCall(query);
 	        
 	        stmt.setInt(1, id);
-	        stmt.setString(2, name);
-	        stmt.setString(3, email);
+	        stmt.setString(2, user.getName());
+	        stmt.setString(3, user.getEmail());
 	        stmt.executeUpdate();
 	        
 	        System.out.println("User updated successfully!");
